@@ -1,5 +1,5 @@
-**LLMs from Scratch – Building GPT-2 Step by Step
-**
+**LLMs from Scratch – Building GPT-2 Step by Step**
+
 Hello readers! 🌞
 
 This repository is my personal journey of learning Large Language Models (LLMs) from scratch. Inspired by the question “How does something like ChatGPT even exist?”, I decided not to settle with just using it—I wanted to understand and build it step by step, all the way down to GPT-2.
