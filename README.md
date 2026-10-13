@@ -1,103 +1,46 @@
-**LLMs from Scratch – Building GPT-2 Step by Step**
+# GPT-2 From Scratch
 
-Hello readers! 🌞
+I wanted to know what actually happens inside a model like ChatGPT, so I built
+GPT-2 myself in PyTorch, one piece at a time. No `transformers` library for the
+model itself: tokenization, attention, the transformer block, the training loop
+and fine-tuning are all written by hand.
 
-This repository is my personal journey of learning Large Language Models (LLMs) from scratch. Inspired by the question “How does something like ChatGPT even exist?”, I decided not to settle with just using it—I wanted to understand and build it step by step, all the way down to GPT-2.
+The work is split into seven notebooks. Each one builds on the previous, and
+each includes the math and my notes next to the code.
 
-Along the way, I studied concepts like RNNs, LSTMs, Transformers, BERT, and GPT, and started piecing together the puzzle behind GPT-2. Everything here is implemented and explained in a friendly, storytelling manner, with all the math, formulas, and full implementations written out—so you can follow along without feeling lost.
+## What's inside
 
-Unlike most tutorials that give only a surface-level overview, this project takes you from zero to GPT-2 with detailed explanations, derivations, and working code. Each notebook is self-contained but connected, and together they form a complete roadmap for anyone who wants to really build and understand an LLM from scratch.
+| # | Notebook | What it covers |
+|---|----------|----------------|
+| 1 | Introduction | How LLMs go from pretraining to a foundation model to an assistant, and why attention matters |
+| 2 | Tokenization & Embeddings | BPE tokenization, token and positional embeddings, sliding-window dataset and DataLoader |
+| 3 | Attention | Self-attention from scratch, then causal (masked) multi-head attention |
+| 4 | Building Blocks | Layer normalization, GELU, feed-forward network, residual connections |
+| 5 | GPT-2 Model & Training | Full GPT-2 architecture, text generation, cross-entropy loss, training loop, loading OpenAI's pretrained weights |
+| 6 | Classification Fine-Tuning | Replacing the output head and fine-tuning GPT-2 as an email classifier |
+| 7 | Instruction Fine-Tuning | Fine-tuning on Alpaca-format instructions and scoring responses with a local LLM judge via Ollama |
 
-This project draws inspiration from:
+## Things worth pointing out
 
-📖 Build a Large Language Model (from Scratch) by Sebastian Raschka
+- **Pretrained weights load into my own model.** Notebook 5 maps OpenAI's GPT-2
+  weights onto the from-scratch architecture. If any layer were wrong the
+  generated text would be garbage, so this doubles as a correctness check.
+- **One model, two kinds of fine-tuning.** The same base model is adapted for
+  classification (new output head, supervised labels) and for instruction
+  following (full-sequence loss on prompt/response pairs).
+- **Automatic evaluation.** Instead of eyeballing the instruction-tuned
+  outputs, a larger model running locally in Ollama scores each response.
 
-🎥 Tutorials from Andrej Karpathy
 
-🤖 And of course… ChatGPT itself
+References
 
-🗂️ Project Structure
+- Sebastian Raschka, Build a Large Language Model (From Scratch). The
+  structure of this project follows the book.
+- Andrej Karpathy's GPT and transformer lectures.
+- Radford et al., Language Models are Unsupervised Multitask Learners (the
+  GPT-2 paper).
 
-The journey is divided across 7 notebooks, each representing a milestone in building and understanding LLMs:
+License
 
-1️⃣ Introduction – The Story of ChatGPT
-
-LLMs explained as if ChatGPT were a child growing from baby → foundation model → assistant
-
-Why pretraining, fine-tuning, and attention matter
-
-2️⃣ Tokenization & Embeddings
-
-Tokenization basics
-
-Word embeddings & positional embeddings
-
-Dataset & DataLoader setup
-
-3️⃣ Attention Mechanism
-
-Understanding attention from zero
-
-Implementing masked multi-head attention
-
-Preparing for GPT-2 architecture
-
-4️⃣ Building Blocks Before GPT-2
-
-Layer Normalization
-
-GELU Activation Function
-
-Residual Connections
-
-Feed-Forward Neural Network
-
-5️⃣ GPT-2 Architecture & Training
-
-Full GPT-2 architecture coded from scratch
-
-Text generation
-
-Loss function & training loop
-
-Loading pretrained GPT-2 weights
-
-6️⃣ Fine-Tuning for Classification
-
-Modified GPT-2 for supervised training
-
-Trained as an email classifier
-
-7️⃣ Instruction Fine-Tuning
-
-Used instruction dataset (Alpaca format)
-
-Trained GPT-2 for assistant-style responses
-
-Evaluated using Ollama
-
-🌟 Why This Project Matters
-
-By walking through these notebooks, you’ll:
-
-Understand how LLMs are trained
-
-See what their architecture looks like
-
-Learn how to fine-tune them for real tasks
-
-Gain confidence beyond “just using” LLMs
-
-This project aims to give you a first-principles understanding of LLMs—something that places you ahead of 95% of people who only see them as “magic.”
-
-📚 References
-
-Sebastian Raschka – Build a Large Language Model (from Scratch)
-
-Andrej Karpathy – Tutorials on GPT & Transformers
-
-OpenAI – ChatGPT (for inspiration and guidance)
-
-🤝 Contribution
-
-This is a learning-focused project, but feel free to fork, suggest improvements, or share your own implementations. Collaboration makes the journey richer!
+MIT. Feel free to fork it, use it to learn, or open an issue if you spot a
+mistake.
